@@ -1,5 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
-import baseEnvUrl from './utils/environmentBaseUrl.ts';
+import baseEnvUrl from './utils/environmentBaseUrl';
 import 'dotenv/config';
 
 /**

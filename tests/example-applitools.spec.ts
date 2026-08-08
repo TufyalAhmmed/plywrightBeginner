@@ -34,8 +34,13 @@ test.beforeAll(async() => {
   const runnerName = (USE_ULTRAFAST_GRID) ? 'Ultrafast Grid' : 'Classic runner';
   Batch = new BatchInfo({name: `ACME Project - ${runnerName}`});
 
+  const apiKey = process.env.APPLITOOLS_API_KEY;
+  if (!apiKey) {
+    throw new Error('APPLITOOLS_API_KEY is not set in .env');
+  }
+
   Config = new Configuration();
-  Config.setApiKey(process.env.APPLITOOLS_API_KEY);
+  Config.setApiKey(apiKey);
   Config.setBatch(Batch);
 
   if (USE_ULTRAFAST_GRID) {
