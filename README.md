@@ -60,12 +60,36 @@ This repository contains a Playwright test automation project for learning and p
   npm run test:e2e:non-smoke
   ```
 
+## Visual (Applitools) Tests
+
+This project includes example visual tests using Applitools Eyes.
+
+Steps to run visual tests:
+
+1. Copy the example env file to create a local `.env` and add your real API key (do NOT commit `.env`):
+   ```bash
+   cp .env.example .env
+   # then edit .env and set APPLITOOLS_API_KEY to your key
+   ```
+2. Ensure `.env` contains a valid key (no `<` or `>` around the value):
+   ```dotenv
+   APPLITOOLS_API_KEY=your_real_applitools_api_key_here
+   ```
+3. Run the visual test example for ACME (Chromium):
+   ```bash
+   npm run test:visual:acme
+   ```
+
+Notes:
+- The test file `tests/example-applitools.spec.ts` validates `process.env.APPLITOOLS_API_KEY` at startup and will fail fast if the key is missing.
+- Keep secrets out of source control. `.env` is ignored by `.gitignore`.
+
 ## Configuration
 
 - `playwright.config.ts` enables parallel execution and retries.
 - Shared test options include trace collection on first retry and screenshots on failure.
 - Projects are configured for `chromium`, `firefox`, `webkit`, and environment-specific targets like `local` and `ci`.
-- Environment variables can be loaded using `dotenv`.
+- Environment variables are loaded using `dotenv` in `playwright.config.ts`.
 
 ## GitHub Actions
 
@@ -81,5 +105,17 @@ The workflow `.github/workflows/playwright.yml` runs on `push` and `pull_request
 ## Notes
 
 - Update `utils/environmentBaseUrl.ts` with real service URLs as needed.
-- Add any environment variables required for CI or local testing in a `.env` file.
-- Add `playwright-report/` to `.gitignore` if you do not want generated reports committed.
+- Add any environment variables required for CI or local testing in a `.env` file (use `.env.example` as a template).
+- `playwright-report/` is excluded in `.gitignore` to avoid committing generated reports.
+
+## Contributing
+
+- Open a PR with a descriptive title. Run tests locally before submitting.
+- For documentation fixes, use commit message prefix `docs:`; for functional changes, use `feat:` or `fix:`.
+
+## Commit message suggestion for this change
+
+- `docs(readme): add Applitools usage, .env template, and visual test instructions`
+
+---
+Updated on: 2026-08-08
